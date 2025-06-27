@@ -7,9 +7,12 @@ import Register from "../pages/Authentication/Register/Register";
 import Coverage from "../pages/Coverage/Coverage";
 import PrivateRoute from "../routes/PrivateRoute";
 import SentParcel from "../pages/SentPearcel/SentParcel";
+import Dashboard from "../layOut/Dashboard";
+import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
+import Pyment from "../pages/Dashboard/Pyment/Pyment";
 
 
- export const router = createBrowserRouter([
+export const router = createBrowserRouter([
     {
         path: '/',
         Component: RootLayOut,
@@ -18,19 +21,20 @@ import SentParcel from "../pages/SentPearcel/SentParcel";
                 index: true,
                 Component: Home
             },
-          {
-            path: "/coverage",
-            Component: Coverage,
-            loader: () => fetch('./serviceCenter.json')
-          },
-          {
-            path: '/sentParcel',
-            element: <PrivateRoute><SentParcel/></PrivateRoute>
-          }
+            {
+                path: "/coverage",
+                Component: Coverage,
+                loader: () => fetch('./serviceCenter.json')
+            },
+            {
+                path: '/sentParcel',
+                element: <PrivateRoute><SentParcel /></PrivateRoute>,
+                loader: () => fetch('./serviceCenter.json')
+            }
         ]
     },
     {
-        path:'/',
+        path: '/',
         Component: AuthLayOut,
         children: [
             {
@@ -40,6 +44,22 @@ import SentParcel from "../pages/SentPearcel/SentParcel";
             {
                 path: '/register',
                 Component: Register
+            }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute>
+            <Dashboard></Dashboard>
+        </PrivateRoute>,
+        children: [
+            {
+                path: 'myParcels',
+                Component: MyParcels
+            },
+            {
+                path: 'payment/:parcelId',
+                Component: Pyment
             }
         ]
     }

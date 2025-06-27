@@ -1,15 +1,26 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 import ProfastLogo from '../ProfastLogo/ProfastLogo';
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
+    const { user, logOut } = useAuth()
+
+    const handleLogOut = () => {
+        logOut()
+            .then(res => {console.log(res)})
+            .catch(error => console.log(error))
+    }
 
     const navItems = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/coverage">Coverage</NavLink></li>
         <li><NavLink to="/sentParcel">Sent A Parcel</NavLink></li>
-        <li><NavLink>Home</NavLink></li>
-        <li><NavLink>Home</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+            </>
+        }
     </>
 
 
@@ -29,7 +40,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link to="/" className="btn btn-ghost text-xl">
-                    <ProfastLogo/>
+                    <ProfastLogo />
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -38,9 +49,15 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login'>
-                <button className="btn btn-primary text-black">Login</button>
-                </Link>
+                {
+                    user
+                        ?
+                        <button onClick={handleLogOut} className='btn btn-primary text-black'>SignOut</button>
+                        :
+                        <Link to='/login'>
+                            <button className="btn btn-primary text-black">Login</button>
+                        </Link>
+                }
             </div>
         </div>
     );

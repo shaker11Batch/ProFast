@@ -1,26 +1,31 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
-import { Navigate } from 'react-router';
+import { Navigate, useLocation, useNavigate } from 'react-router';
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth()
+    const location = useLocation()
 
     if (loading) {
-        <>
+
+        return <>
             <span className="loading loading-spinner text-primary"></span>
-            <span className="loading loading-spinner text-secondary"></span>
-            <span className="loading loading-spinner text-accent"></span>
-            <span className="loading loading-spinner text-neutral"></span>
-            <span className="loading loading-spinner text-info"></span>
-            <span className="loading loading-spinner text-success"></span>
-            <span className="loading loading-spinner text-warning"></span>
-            <span className="loading loading-spinner text-error"></span>
+            <span className="loading loading-spinner text-primary"></span>
+            <span className="loading loading-spinner text-primary"></span>
+            <span className="loading loading-spinner text-primary"></span>
+            <span className="loading loading-spinner text-primary"></span>
+
         </>
+
     }
 
-    if(!user){
-        <Navigate to="/login" state={{}}></Navigate>
+
+    if (!user) {
+        return <Navigate to="/login" state={{ from: location?.pathname }}  ></Navigate>
     }
+
+
+
     return children
 };
 
