@@ -28,7 +28,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/sentParcel',
-                element: <PrivateRoute><SentParcel /></PrivateRoute>,
+                // element: <PrivateRoute><SentParcel /></PrivateRoute>,
+                element: <SentParcel></SentParcel>,
                 loader: () => fetch('./serviceCenter.json')
             }
         ]
@@ -49,9 +50,10 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute>
-            <Dashboard></Dashboard>
-        </PrivateRoute>,
+        // element: <PrivateRoute>
+        //     <Dashboard></Dashboard>
+        // </PrivateRoute>,
+        element: <Dashboard></Dashboard>,
         children: [
             {
                 path: 'myParcels',
