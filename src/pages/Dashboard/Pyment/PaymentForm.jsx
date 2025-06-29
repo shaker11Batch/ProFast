@@ -104,7 +104,7 @@ const PaymentForm = () => {
                             html: `<strong>Transaction ID: </strong> <code>${transactionId}</code>`,
                             confirmButtonText: 'GO to My Parcels',
                         })
-                        navigate('/myParcels')
+                        navigate('/dashboard/myParcels')
                     }
                 }
             }

@@ -10,6 +10,7 @@ import SentParcel from "../pages/SentPearcel/SentParcel";
 import Dashboard from "../layOut/Dashboard";
 import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
 import Pyment from "../pages/Dashboard/Pyment/Pyment";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 
 
 export const router = createBrowserRouter([
@@ -62,7 +63,15 @@ export const router = createBrowserRouter([
             {
                 path: 'payment/:parcelId',
                 Component: Pyment
-            }
+            },
+            {
+                path: 'paymentHistory',
+                Component: PaymentHistory
+            },
+            {
+                path: 'track',
+                Component: TrackParcel
+            },
         ]
     }
 ])
